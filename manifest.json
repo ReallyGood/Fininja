@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "version": "0.1",
+  "name": "Really Good Financial Ninja Tools",
+  "description": "Tweaks and tools to boost your financials. Created by Really Good, Product by Fininja",
+  "permissions": ["scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
