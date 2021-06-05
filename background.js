@@ -1,12 +1,20 @@
+let tabId;
+
 // get current tab and execute script
 async function executeScript() {
   const queryOptions = { active: true, currentWindow: true };
   const [tab] = await chrome.tabs.query(queryOptions);
 
-  chrome.scripting.executeScript({
-    files: ["scripts/malam.js"],
-    target: { tabId: tab.id, allFrames: true },
-  });
+  if (tab) {
+    tabId = tab.id;
+  }
+
+  if (tabId) {
+    chrome.scripting.executeScript({
+      files: ["scripts/malam.js"],
+      target: { tabId, allFrames: true },
+    });
+  }
 }
 
 // update on page reload

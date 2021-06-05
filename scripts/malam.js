@@ -1,7 +1,13 @@
 function init() {
-  if (location.href !== "https://calc.malam-payroll.com/neto.php") return;
+  if (!location.href.startsWith("https://calc.malam-payroll.com/neto.php")) {
+    return;
+  }
 
-  console.log("Hey from malam calc", location.href);
+  const neto = document.querySelector("#EX_NET").textContent;
+  const isShowingSlip = !!neto;
+  if (isShowingSlip) {
+    console.log("ok then");
+  }
 }
 
 init();
