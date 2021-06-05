@@ -1,3 +1,5 @@
+<div style="direction: rtl">
+
 # כוכבי נינג'ה פיננסית
 
 שדרוגים ותוספות לאינטרנט, בקטנה. תוסף פשוט לכרום, לא שולח לשרת שום מידע שלכם.
@@ -11,3 +13,5 @@
 רעיון ואפיון: [נתי אהרונוביץ', נינג'ה פיננסית](facebook.com/nathan.aharonovich/)
 
 פיתוח זריז: [רוני אורבך, Really Good](https://reallygood.co.il?utm_campaign=fininja)
+
+</div>
