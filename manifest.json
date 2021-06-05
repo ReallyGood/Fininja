@@ -4,7 +4,7 @@
   "name": "Really Good Financial Ninja Tools",
   "description": "Tweaks and tools to boost your financials. Created by Really Good, Product by Fininja",
   "permissions": ["scripting"],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["https://*.malam-payroll.com/*"],
   "background": {
     "service_worker": "background.js"
   }

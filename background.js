@@ -5,7 +5,7 @@ async function executeScript() {
 
   chrome.scripting.executeScript({
     files: ["scripts/malam.js"],
-    target: { tabId: tab.id },
+    target: { tabId: tab.id, allFrames: true },
   });
 }
 
