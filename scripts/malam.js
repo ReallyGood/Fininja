@@ -45,10 +45,26 @@ function processAndInject() {
 
   // sanity. Allow for a tiny difference due to js infamous handling of floating point numbers
   if (Math.abs(employerCost - sum([net, social, taxRobbery]) < 2)) {
-    console.log("yes good to go!");
+    inject({ taxRobbery, social, employerCost, net });
   } else {
     alert("טוב, משהו לא מסתדר במספרים שלנו 🤔 אם זה חוזר, נשמח לשמוע על הבעיה");
   }
+}
+
+function inject(results) {
+  if (!results || document.querySelector("#fininja-results")) {
+    console.warn("No data found for Fininja calc or already injected");
+    return;
+  }
+
+  const { taxRobbery, social, employerCost, net } = results;
+
+  const newMarkup = `<h1 class="brcolor5" id="fininja-results">כמה עשית החודש?</h1>`;
+
+  const slip = document.querySelector("#paySlip");
+  const newContainer = document.createElement("div");
+  newContainer.innerHTML = newMarkup;
+  slip.prepend(newContainer);
 }
 
 init();
