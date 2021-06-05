@@ -59,7 +59,31 @@ function inject(results) {
 
   const { taxRobbery, social, employerCost, net } = results;
 
-  const newMarkup = `<h1 class="brcolor5" id="fininja-results">כמה עשית החודש?</h1>`;
+  const format = (number) => number.toLocaleString("he-IL");
+
+  const newMarkup = `
+  <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
+  <table class="tablestylelines" style="width: 34%; margin-bottom: 30px;">
+    <tbody>
+    <tr>
+        <td>עלות מעסיק</td>
+        <td>${format(employerCost)}</td>
+      </tr>
+      <tr>
+        <td>מתוך זה סוציאליות</td>
+        <td style="direction: ltr;">-${format(social)}</td>
+      </tr>
+      <tr>
+        <td>סה"כ מיסים</td>
+        <td style="direction: ltr;">-${format(taxRobbery)}</td>
+      </tr>
+      <tr>
+        <td>נטו בבנק</td>
+        <td>${format(net)}</td>
+      </tr>
+    </tbody>
+  </table>
+  `;
 
   const slip = document.querySelector("#paySlip");
   const newContainer = document.createElement("div");
