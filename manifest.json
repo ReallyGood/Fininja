@@ -16,7 +16,13 @@
   ],
   "action": {
     "default_icon": {
-      "16": "images/fininja-icon.png"
+      "16": "images/fininja-icon.png",
+      "48": "images/fininja-48.png"
     }
+  },
+  "icons": {
+    "16": "images/fininja-icon.png",
+    "48": "images/fininja-48.png",
+    "128": "images/fininja-128.png"
   }
 }
