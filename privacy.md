@@ -1,3 +1,13 @@
+<div dir="rtl">
+
+## מדיניות פרטיות
+
+השקענו וניסחנו באנגלית. אמ;לק בעברית: אנחנו לא אוספים שום מידע שלכם, הכל מעובד מקומית על המחשב ואפילו עוגיות או אנליטיקס לא פיזרנו פה. המדיניות באנגלית יותר מפורטת ומחייבת, תקראו.
+
+</div>
+
+---
+
 ## Privacy Policy
 
 Really Good Code ltd. built the Fininja Chrome Extension as an Open Source app. This Service is provided by Really Good Code ltd. at no cost and is intended for use as is.
