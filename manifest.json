@@ -13,5 +13,10 @@
       "resources": ["images/*"],
       "matches": ["https://*.malam-payroll.com/*"]
     }
-  ]
+  ],
+  "action": {
+    "default_icon": {
+      "16": "images/fininja-icon.png"
+    }
+  }
 }
