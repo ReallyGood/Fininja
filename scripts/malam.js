@@ -1,3 +1,19 @@
+// helper: grab that raw number from that element id
+function grab(id) {
+  return parseFloat(
+    document.querySelector(`#${id}`).textContent.replace(/,/g, "")
+  );
+}
+
+// helper: sum numbers from array
+function sum(arr) {
+  return parseFloat(
+    arr
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      .toFixed(2)
+  );
+}
+
 function init() {
   // only run on Malam's calc iframe
   if (!location.href.startsWith("https://calc.malam-payroll.com/neto.php")) {
@@ -12,18 +28,6 @@ function init() {
 }
 
 function processAndInject() {
-  // helper: grab that raw number from that element id
-  const grab = (id) =>
-    parseFloat(document.querySelector(`#${id}`).textContent.replace(/,/g, ""));
-
-  // helper: sum numbers from array
-  const sum = (arr) =>
-    parseFloat(
-      arr
-        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-        .toFixed(2)
-    );
-
   // grab everything
   const taxRobbery = sum([
     grab("PS_EX_ER_CONT_NI"), // ביטוח לאומי מעסיק
@@ -70,16 +74,20 @@ function inject(results) {
         <td>${format(employerCost)}</td>
       </tr>
       <tr>
-        <td>מתוך זה סוציאליות</td>
-        <td style="direction: ltr;">-${format(social)}</td>
+        <td>מיסים</td>
+        <td>${format(taxRobbery)}</td>
       </tr>
       <tr>
-        <td>סה"כ מיסים</td>
-        <td style="direction: ltr;">-${format(taxRobbery)}</td>
+        <td>סוציאליות</td>
+        <td>${format(social)}</td>
       </tr>
       <tr>
         <td>נטו בבנק</td>
         <td>${format(net)}</td>
+      </tr>
+      <tr>
+        <td>אצלך בכיס (נטו + סוציאליות)</td>
+        <td>${format(sum([net, social]))}</td>
       </tr>
     </tbody>
   </table>
