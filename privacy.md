@@ -1,6 +1,6 @@
 ## Privacy Policy
 
-Really Good Code ltd. built the Fininja Chrome Extension app as an Open Source app. This Service is provided by Really Good Code ltd. at no cost and is intended for use as is.
+Really Good Code ltd. built the Fininja Chrome Extension as an Open Source app. This Service is provided by Really Good Code ltd. at no cost and is intended for use as is.
 
 If you choose to use our app (or "Service", herein), then you agree to the policies described in this document. We DO NOT collet any data. We will not use or share your information with anyone, period.
 
