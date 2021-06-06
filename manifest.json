@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.1",
+  "version": "1.0",
   "name": "נינג'ה פיננסית",
   "description": "שדרוג פשוט למחשבון השכר של מלם. לא שולח מידע פרטי",
   "permissions": ["scripting"],
