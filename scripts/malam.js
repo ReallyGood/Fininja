@@ -70,23 +70,23 @@ function inject(results) {
   <table class="tablestylelines" style="width: 34%; margin-bottom: 30px;">
     <tbody>
     <tr>
-        <td>עלות מעסיק</td>
+        <td class="name">עלות מעסיק</td>
         <td>${format(employerCost)}</td>
       </tr>
       <tr>
-        <td>מיסים</td>
+        <td class="name">מיסים</td>
         <td>${format(taxRobbery)}</td>
       </tr>
       <tr>
-        <td>סוציאליות</td>
+        <td class="name">סוציאליות</td>
         <td>${format(social)}</td>
       </tr>
       <tr>
-        <td>נטו בבנק</td>
+        <td class="name">נטו בבנק</td>
         <td>${format(net)}</td>
       </tr>
       <tr>
-        <td>אצלך בכיס (נטו + סוציאליות)</td>
+        <td class="name">אצלך בכיס (נטו + סוציאליות)</td>
         <td>${format(sum([net, social]))}</td>
       </tr>
     </tbody>
