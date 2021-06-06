@@ -20,13 +20,9 @@ async function executeScript() {
 // update on page reload
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === "complete") {
-    console.log("update");
     executeScript();
   }
 });
 
 // update on tab change
-chrome.tabs.onActivated.addListener(() => {
-  console.log("activate");
-  executeScript();
-});
+chrome.tabs.onActivated.addListener(executeScript);

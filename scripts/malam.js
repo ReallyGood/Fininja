@@ -9,7 +9,10 @@ function grab(id) {
 function sum(arr) {
   return parseFloat(
     arr
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      .reduce(
+        (accumulator, currentValue) => accumulator + (currentValue || 0),
+        0
+      )
       .toFixed(2)
   );
 }
