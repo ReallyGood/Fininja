@@ -101,12 +101,18 @@ function inject(results) {
       height: 16px;
       vertical-align: -3px;
       margin-left: 3px;">נינג'ה פיננסית</a> |
-    <a href="https://reallygood.co.il?utm_medium=fininja&utm_campaign=calc" title="High-End Front-End" target="_blank">
+    <a href="https://reallygood.co.il?utm_source=fininja&utm_campaign=calc" title="High-End Front-End" target="_blank">
       <img src="${chrome.runtime.getURL("images/rg-logo.svg")}" style="
         display: inline;
         height: 16px;
         vertical-align: -3px;
-        margin-left: 3px;">Really Good</a>
+        margin-left: 3px;">Really Good</a> | 
+        <a href="https://github.com/ReallyGood/Fininja" title="קוד ב-github ומדיניות פרטיות" target="_blank">
+      <img src="${chrome.runtime.getURL("images/github.svg")}" style="
+        display: inline;
+        height: 16px;
+        vertical-align: -3px;
+        margin-left: 3px;">קוד ופרטיות</a>
     </div>
   `;
 

@@ -12,6 +12,6 @@
 
 _רעיון ואפיון: [נתי אהרונוביץ', נינג'ה פיננסית](facebook.com/nathan.aharonovich/)_
 
-_&#x202b;פיתוח זריז: [רוני אורבך, Really Good](https://reallygood.co.il?utm_medium=fininja&utm_campaign=github)_
+_&#x202b;פיתוח זריז: [Really Good](https://reallygood.co.il?utm_source=fininja&utm_campaign=github)_
 
 </div>
