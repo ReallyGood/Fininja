@@ -67,26 +67,26 @@ function inject(results) {
 
   const newMarkup = `
   <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
-  <table class="tablestylelines" style="width: 34%; margin-bottom: 30px;">
+  <table class="tablestylelines" style="width: 34%; margin-bottom: 30px; font-weight: normal;">
     <tbody>
-    <tr>
-        <td class="name">עלות מעסיק</td>
+      <tr>
+        <td style="font-weight: normal;">עלות מעסיק</td>
         <td>${format(employerCost)}</td>
       </tr>
       <tr>
-        <td class="name">מיסים</td>
+        <td style="font-weight: normal;">מיסים</td>
         <td>${format(taxRobbery)}</td>
       </tr>
       <tr>
-        <td class="name">סוציאליות</td>
+        <td style="font-weight: normal;">סוציאליות</td>
         <td>${format(social)}</td>
       </tr>
       <tr>
-        <td class="name">נטו בבנק</td>
+        <td style="font-weight: normal;">נטו בבנק</td>
         <td>${format(net)}</td>
       </tr>
       <tr>
-        <td class="name">אצלך בכיס (נטו + סוציאליות)</td>
+        <td style="font-weight: normal;">אצלך בכיס (נטו + סוציאליות)</td>
         <td>${format(sum([net, social]))}</td>
       </tr>
     </tbody>
