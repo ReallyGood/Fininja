@@ -7,5 +7,11 @@
   "host_permissions": ["https://*.malam-payroll.com/*"],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*"],
+      "matches": ["https://*.malam-payroll.com/*"]
+    }
+  ]
 }

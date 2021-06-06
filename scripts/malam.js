@@ -91,13 +91,18 @@ function inject(results) {
       </tr>
     </tbody>
   </table>
-  <div>
-    🥷 <a href="https://www.facebook.com/groups/Fininja" target="_blank" title="ללמוד איך כסף עובד">נינג'ה פיננסית</a> |
+  <div style="padding-right: 7px;">
+    <a href="https://www.facebook.com/groups/Fininja" target="_blank" title="ללמוד איך כסף עובד">
+      <img src="${chrome.runtime.getURL("images/fininja-icon.png")}" style="
+      display: inline;
+      height: 16px;
+      vertical-align: -3px;
+      margin-left: 3px;">נינג'ה פיננסית</a> |
     <a href="https://reallygood.co.il?utm_medium=fininja&utm_campaign=calc" title="High-End Front-End" target="_blank">
-      <img src="https://reallygood.co.il/images/reallygoodlogo.svg" height="16" style="
+      <img src="${chrome.runtime.getURL("images/rg-logo.svg")}" style="
         display: inline;
-        height: 18px;
-        vertical-align: -4px;
+        height: 16px;
+        vertical-align: -3px;
         margin-left: 3px;">Really Good</a>
     </div>
   `;
