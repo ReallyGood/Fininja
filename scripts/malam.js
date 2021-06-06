@@ -67,7 +67,7 @@ function inject(results) {
 
   const newMarkup = `
   <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
-  <table class="tablestylelines" style="width: 34%; margin-bottom: 30px; font-weight: normal;">
+  <table class="tablestylelines" style="width: 34%; margin-bottom: 15px; font-weight: normal;">
     <tbody>
       <tr>
         <td style="font-weight: normal;">עלות מעסיק</td>
@@ -91,10 +91,20 @@ function inject(results) {
       </tr>
     </tbody>
   </table>
+  <div>
+    🥷 <a href="https://www.facebook.com/groups/Fininja" target="_blank" title="ללמוד איך כסף עובד">נינג'ה פיננסית</a> |
+    <a href="https://reallygood.co.il?utm_medium=fininja&utm_campaign=calc" title="High-End Front-End" target="_blank">
+      <img src="https://reallygood.co.il/images/reallygoodlogo.svg" height="16" style="
+        display: inline;
+        height: 18px;
+        vertical-align: -4px;
+        margin-left: 3px;">Really Good</a>
+    </div>
   `;
 
   const slip = document.querySelector("#paySlip");
   const newContainer = document.createElement("div");
+  newContainer.setAttribute("style", "margin-bottom: 30px;");
   newContainer.innerHTML = newMarkup;
   slip.prepend(newContainer);
 }
