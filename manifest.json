@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "version": "0.1",
-  "name": "Really Good Financial Ninja Tools",
+  "name": "נינג'ה פיננסית",
   "description": "Tweaks and tools to boost your financials. Created by Really Good, Product by Fininja",
   "permissions": ["scripting"],
   "host_permissions": ["https://*.malam-payroll.com/*"],
