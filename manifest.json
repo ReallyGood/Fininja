@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "version": "0.1",
   "name": "נינג'ה פיננסית",
-  "description": "Tweaks and tools to boost your financials. Created by Really Good, Product by Fininja",
+  "description": "שדרוג פשוט למחשבון השכר של מלם. לא שולח מידע פרטי",
   "permissions": ["scripting"],
   "host_permissions": ["https://*.malam-payroll.com/*"],
   "background": {
