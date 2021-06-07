@@ -10,7 +10,7 @@
 
 ---
 
-_רעיון ואפיון: [נתי אהרונוביץ', נינג'ה פיננסית](facebook.com/nathan.aharonovich/)_
+_רעיון ואפיון: [נתי אהרונוביץ', נינג'ה פיננסית](https://facebook.com/nathan.aharonovich/)_
 
 _&#x202b;פיתוח זריז: [Really Good](https://reallygood.co.il?utm_source=fininja&utm_campaign=github)_
 
