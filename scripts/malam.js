@@ -1,5 +1,3 @@
-const storagePrevKey = "prevFininjaResults";
-
 // helper: grab that raw number from that element id
 function grab(id) {
   return parseFloat(
@@ -57,7 +55,7 @@ function processAndInject() {
     const taxPercentage = ((taxRobbery / employerCost) * 100).toFixed(1);
     const results = { taxRobbery, social, employerCost, net, taxPercentage };
     inject(results);
-    localStorage.setItem(storagePrevKey, JSON.stringify(results));
+    localStorage.setItem("prevFininjaResults", JSON.stringify(results));
   } else {
     alert("טוב, משהו לא מסתדר במספרים שלנו 🤔 אם זה חוזר, נשמח לשמוע על הבעיה");
   }
@@ -71,17 +69,20 @@ function inject(results) {
 
   const { taxRobbery, social, employerCost, net, taxPercentage } = results;
 
-  const prev = JSON.parse(localStorage.getItem(storagePrevKey));
+  const prev = JSON.parse(localStorage.getItem("prevFininjaResults"));
 
-  const format = (number) => number.toLocaleString("he-IL");
+  const format = (number, { addSign = false } = {}) => {
+    const sign = addSign && number > 0 ? "+" : "";
+    return `${sign}${number.toLocaleString("he-IL")}`;
+  };
 
   const newMarkup = `
   <style>
     #fininja .dim { opacity: 0.6; }
-    #fininja table { width: 496px; margin-bottom: 15px; font-weight: normal; }
+    #fininja table { width: 609px; margin-bottom: 15px; font-weight: normal; }
     #fininja table th:nth-child(n+2) { width: 120px; }
-    #fininja table.noPrev th:nth-child(2),
-    #fininja table.noPrev td:nth-child(2) { display: none; }
+    #fininja table td:nth-child(4) { direction: ltr; }
+    #fininja table.noPrev th:nth-child(n+2) { display: none; }
     #fininja table td:first-child { font-weight: normal; }
     #fininja footer { padding-right: 7px; }
     #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
@@ -94,6 +95,7 @@ function inject(results) {
           <th></th>
           <th>בחישוב הזה</th>
           <th>בחישוב הקודם</th>
+          <th>הפרש</th>
         </tr>
       </thead>
       <tbody>
@@ -101,6 +103,9 @@ function inject(results) {
           <td>עלות מעסיק</td>
           <td>${format(employerCost)}</td>
           <td>${format(prev.employerCost)}</td>
+          <td>${format(employerCost - prev.employerCost, {
+            addSign: true,
+          })}</td>
         </tr>
         <tr>
           <td>מיסים</td>
@@ -110,21 +115,27 @@ function inject(results) {
           <td>${format(prev.taxRobbery)} <span class="dim">(%${
     prev.taxPercentage
   })</span></td>
+          <td>${format(taxRobbery - prev.taxRobbery, { addSign: true })}</td>
         </tr>
         <tr>
           <td>סוציאליות</td>
           <td>${format(social)}</td>
           <td>${format(prev.social)}</td>
+          <td>${format(social - prev.social, { addSign: true })}</td>
         </tr>
         <tr>
           <td>נטו בבנק</td>
           <td>${format(net)}</td>
           <td>${format(prev.net)}</td>
+          <td>${format(net - prev.net, { addSign: true })}</td>
         </tr>
         <tr>
           <td>אצלך בכיס (נטו + סוציאליות)</td>
           <td>${format(sum([net, social]))}</td>
           <td>${format(sum([prev.net, prev.social]))}</td>
+          <td>${format(sum([net, social]) - sum([prev.net, prev.social]), {
+            addSign: true,
+          })}</td>
         </tr>
       </tbody>
     </table>
