@@ -1,3 +1,5 @@
+const storagePrevKey = "prevFininjaResults";
+
 // helper: grab that raw number from that element id
 function grab(id) {
   return parseFloat(
@@ -52,7 +54,10 @@ function processAndInject() {
 
   // sanity. Allow for a tiny difference due to js infamous handling of floating point numbers
   if (Math.abs(employerCost - sum([net, social, taxRobbery]) < 2)) {
-    inject({ taxRobbery, social, employerCost, net });
+    const taxPercentage = ((taxRobbery / employerCost) * 100).toFixed(1);
+    const results = { taxRobbery, social, employerCost, net, taxPercentage };
+    inject(results);
+    localStorage.setItem(storagePrevKey, JSON.stringify(results));
   } else {
     alert("טוב, משהו לא מסתדר במספרים שלנו 🤔 אם זה חוזר, נשמח לשמוע על הבעיה");
   }
@@ -64,44 +69,62 @@ function inject(results) {
     return;
   }
 
-  const { taxRobbery, social, employerCost, net } = results;
-  const taxPercentage = ((taxRobbery / employerCost) * 100).toFixed(1);
+  const { taxRobbery, social, employerCost, net, taxPercentage } = results;
+
+  const prev = JSON.parse(localStorage.getItem(storagePrevKey));
 
   const format = (number) => number.toLocaleString("he-IL");
 
   const newMarkup = `
   <style>
     #fininja .dim { opacity: 0.6; }
-    #fininja table { width: 34%; margin-bottom: 15px; font-weight: normal; }
+    #fininja table { width: 496px; margin-bottom: 15px; font-weight: normal; }
+    #fininja table th:nth-child(n+2) { width: 120px; }
+    #fininja table.noPrev th:nth-child(2),
+    #fininja table.noPrev td:nth-child(2) { display: none; }
     #fininja table td:first-child { font-weight: normal; }
     #fininja footer { padding-right: 7px; }
     #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
   </style>
   <div id="fininja">
     <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
-    <table class="tablestylelines">
+    <table class="tablestylelines ${!prev && "noPrev"}">
+      <thead>
+        <tr>
+          <th></th>
+          <th>בחישוב הזה</th>
+          <th>בחישוב הקודם</th>
+        </tr>
+      </thead>
       <tbody>
         <tr>
           <td>עלות מעסיק</td>
           <td>${format(employerCost)}</td>
+          <td>${format(prev.employerCost)}</td>
         </tr>
         <tr>
           <td>מיסים</td>
           <td>${format(
             taxRobbery
           )} <span class="dim">(%${taxPercentage})</span></td>
+          <td>${format(prev.taxRobbery)} <span class="dim">(%${
+    prev.taxPercentage
+  })</span></td>
         </tr>
         <tr>
           <td>סוציאליות</td>
           <td>${format(social)}</td>
+          <td>${format(prev.social)}</td>
         </tr>
         <tr>
           <td>נטו בבנק</td>
           <td>${format(net)}</td>
+          <td>${format(prev.net)}</td>
         </tr>
         <tr>
           <td>אצלך בכיס (נטו + סוציאליות)</td>
           <td>${format(sum([net, social]))}</td>
+          <td>${format(sum([prev.net, prev.social]))}</td>
         </tr>
       </tbody>
     </table>
