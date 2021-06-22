@@ -65,15 +65,17 @@ function inject(results) {
   }
 
   const { taxRobbery, social, employerCost, net } = results;
+  const taxPercentage = ((taxRobbery / employerCost) * 100).toFixed(1);
 
   const format = (number) => number.toLocaleString("he-IL");
 
   const newMarkup = `
   <style>
-  #fininja table { width: 34%; margin-bottom: 15px; font-weight: normal; }
-  #fininja table td:first-child { font-weight: normal; }
-  #fininja footer { padding-right: 7px; }
-  #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
+    #fininja .dim { opacity: 0.6; }
+    #fininja table { width: 34%; margin-bottom: 15px; font-weight: normal; }
+    #fininja table td:first-child { font-weight: normal; }
+    #fininja footer { padding-right: 7px; }
+    #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
   </style>
   <div id="fininja">
     <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
@@ -85,7 +87,9 @@ function inject(results) {
         </tr>
         <tr>
           <td>מיסים</td>
-          <td>${format(taxRobbery)}</td>
+          <td>${format(
+            taxRobbery
+          )} <span class="dim">(%${taxPercentage})</span></td>
         </tr>
         <tr>
           <td>סוציאליות</td>
