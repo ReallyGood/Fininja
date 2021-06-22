@@ -92,9 +92,9 @@ function inject(results) {
     #fininja [data-diff] { direction: ltr; }
     #fininja [data-diff]::after { content: attr(data-diff); }
     #fininja .more-is-better [data-diff^="+"],
-    #fininja .less-is-better [data-diff^="-"] { color: hsl(69deg 100% 35%); }
+    #fininja .less-is-better [data-diff^="‎-"] { color: hsl(69deg 100% 35%); }
     
-    #fininja .more-is-better [data-diff^="-"],
+    #fininja .more-is-better [data-diff^="‎-"],
     #fininja .less-is-better [data-diff^="+"] { color: hsl(16deg 68% 50%); }
 
     #fininja footer { padding-right: 7px; }
