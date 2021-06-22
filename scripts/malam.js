@@ -69,50 +69,50 @@ function inject(results) {
   const format = (number) => number.toLocaleString("he-IL");
 
   const newMarkup = `
-  <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
-  <table class="tablestylelines" style="width: 34%; margin-bottom: 15px; font-weight: normal;">
-    <tbody>
-      <tr>
-        <td style="font-weight: normal;">עלות מעסיק</td>
-        <td>${format(employerCost)}</td>
-      </tr>
-      <tr>
-        <td style="font-weight: normal;">מיסים</td>
-        <td>${format(taxRobbery)}</td>
-      </tr>
-      <tr>
-        <td style="font-weight: normal;">סוציאליות</td>
-        <td>${format(social)}</td>
-      </tr>
-      <tr>
-        <td style="font-weight: normal;">נטו בבנק</td>
-        <td>${format(net)}</td>
-      </tr>
-      <tr>
-        <td style="font-weight: normal;">אצלך בכיס (נטו + סוציאליות)</td>
-        <td>${format(sum([net, social]))}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div style="padding-right: 7px;">
-    <a href="https://www.facebook.com/groups/Fininja" target="_blank" title="ללמוד איך כסף עובד">
-      <img src="${chrome.runtime.getURL("images/fininja-icon.png")}" style="
-      display: inline;
-      height: 16px;
-      vertical-align: -3px;
-      margin-left: 3px;">נינג'ה פיננסית</a> |
-    <a href="https://reallygood.co.il?utm_source=fininja&utm_campaign=calc" title="High-End Front-End" target="_blank">
-      <img src="${chrome.runtime.getURL("images/rg-logo.svg")}" style="
-        display: inline;
-        height: 16px;
-        vertical-align: -3px;
-        margin-left: 3px;">Really Good</a> | 
-        <a href="https://github.com/ReallyGood/Fininja" title="קוד ב-github ומדיניות פרטיות" target="_blank">
-      <img src="${chrome.runtime.getURL("images/github.svg")}" style="
-        display: inline;
-        height: 16px;
-        vertical-align: -3px;
-        margin-left: 3px;">קוד ופרטיות</a>
+  <style>
+  #fininja table { width: 34%; margin-bottom: 15px; font-weight: normal; }
+  #fininja table td:first-child { font-weight: normal; }
+  #fininja footer { padding-right: 7px; }
+  #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
+  </style>
+  <div id="fininja">
+    <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
+    <table class="tablestylelines">
+      <tbody>
+        <tr>
+          <td>עלות מעסיק</td>
+          <td>${format(employerCost)}</td>
+        </tr>
+        <tr>
+          <td>מיסים</td>
+          <td>${format(taxRobbery)}</td>
+        </tr>
+        <tr>
+          <td>סוציאליות</td>
+          <td>${format(social)}</td>
+        </tr>
+        <tr>
+          <td>נטו בבנק</td>
+          <td>${format(net)}</td>
+        </tr>
+        <tr>
+          <td>אצלך בכיס (נטו + סוציאליות)</td>
+          <td>${format(sum([net, social]))}</td>
+        </tr>
+      </tbody>
+    </table>
+    <footer>
+      <a href="https://www.facebook.com/groups/Fininja" target="_blank" title="ללמוד איך כסף עובד">
+        <img src="${chrome.runtime.getURL(
+          "images/fininja-icon.png"
+        )}">נינג'ה פיננסית</a> |
+      <a href="https://reallygood.co.il?utm_source=fininja&utm_campaign=calc" title="High-End Front-End" target="_blank">
+        <img src="${chrome.runtime.getURL(
+          "images/rg-logo.svg"
+        )}">Really Good</a> | 
+          <a href="https://github.com/ReallyGood/Fininja" title="קוד ב-github ומדיניות פרטיות" target="_blank">
+        <img src="${chrome.runtime.getURL("images/github.svg")}">קוד ופרטיות</a>
+      </footer>
     </div>
   `;
 
