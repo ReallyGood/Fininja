@@ -69,7 +69,10 @@ function inject(results) {
 
   const { taxRobbery, social, employerCost, net, taxPercentage } = results;
 
-  const prev = JSON.parse(localStorage.getItem("prevFininjaResults"));
+  const prevJSON = localStorage.getItem("prevFininjaResults");
+  const prev = prevJSON
+    ? JSON.parse(prevJSON)
+    : { taxRobbery: 0, social: 0, employerCost: 0, net: 0, taxPercentage: 0 };
 
   const format = (number, { addSign = false } = {}) => {
     const sign = addSign && number > 0 ? "+" : "";
@@ -82,14 +85,16 @@ function inject(results) {
     #fininja table { width: 609px; margin-bottom: 15px; font-weight: normal; }
     #fininja table th:nth-child(n+2) { width: 120px; }
     #fininja table td:nth-child(4) { direction: ltr; }
-    #fininja table.noPrev th:nth-child(n+2) { display: none; }
+    #fininja table.noPrev { width: 34%; }
+    #fininja table.noPrev thead { display: none; }
+    #fininja table.noPrev td:nth-child(n+3) { display: none; }
     #fininja table td:first-child { font-weight: normal; }
     #fininja footer { padding-right: 7px; }
     #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
   </style>
   <div id="fininja">
     <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
-    <table class="tablestylelines ${!prev && "noPrev"}">
+    <table class="tablestylelines ${!prevJSON && "noPrev"}">
       <thead>
         <tr>
           <th></th>
