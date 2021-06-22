@@ -84,11 +84,19 @@ function inject(results) {
     #fininja .dim { opacity: 0.6; }
     #fininja table { width: 609px; margin-bottom: 15px; font-weight: normal; }
     #fininja table th:nth-child(n+2) { width: 120px; }
-    #fininja table td:nth-child(4) { direction: ltr; }
     #fininja table.noPrev { width: 34%; }
     #fininja table.noPrev thead { display: none; }
     #fininja table.noPrev td:nth-child(n+3) { display: none; }
     #fininja table td:first-child { font-weight: normal; }
+
+    #fininja [data-diff] { direction: ltr; }
+    #fininja [data-diff]::after { content: attr(data-diff); }
+    #fininja .more-is-better [data-diff^="+"],
+    #fininja .less-is-better [data-diff^="-"] { color: hsl(69deg 100% 35%); }
+    
+    #fininja .more-is-better [data-diff^="-"],
+    #fininja .less-is-better [data-diff^="+"] { color: hsl(16deg 68% 50%); }
+
     #fininja footer { padding-right: 7px; }
     #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
   </style>
@@ -104,15 +112,15 @@ function inject(results) {
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="less-is-better">
           <td>עלות מעסיק</td>
           <td>${format(employerCost)}</td>
           <td>${format(prev.employerCost)}</td>
-          <td>${format(employerCost - prev.employerCost, {
+          <td data-diff="${format(employerCost - prev.employerCost, {
             addSign: true,
-          })}</td>
+          })}"></td>
         </tr>
-        <tr>
+        <tr class="less-is-better">
           <td>מיסים</td>
           <td>${format(
             taxRobbery
@@ -120,27 +128,34 @@ function inject(results) {
           <td>${format(prev.taxRobbery)} <span class="dim">(%${
     prev.taxPercentage
   })</span></td>
-          <td>${format(taxRobbery - prev.taxRobbery, { addSign: true })}</td>
+          <td data-diff="${format(taxRobbery - prev.taxRobbery, {
+            addSign: true,
+          })}"></td>
         </tr>
-        <tr>
+        <tr class="more-is-better">
           <td>סוציאליות</td>
           <td>${format(social)}</td>
           <td>${format(prev.social)}</td>
-          <td>${format(social - prev.social, { addSign: true })}</td>
+          <td data-diff="${format(social - prev.social, {
+            addSign: true,
+          })}"></td>
         </tr>
-        <tr>
+        <tr class="more-is-better">
           <td>נטו בבנק</td>
           <td>${format(net)}</td>
           <td>${format(prev.net)}</td>
-          <td>${format(net - prev.net, { addSign: true })}</td>
+          <td data-diff="${format(net - prev.net, { addSign: true })}"></td>
         </tr>
-        <tr>
+        <tr class="more-is-better">
           <td>אצלך בכיס (נטו + סוציאליות)</td>
           <td>${format(sum([net, social]))}</td>
           <td>${format(sum([prev.net, prev.social]))}</td>
-          <td>${format(sum([net, social]) - sum([prev.net, prev.social]), {
-            addSign: true,
-          })}</td>
+          <td data-diff="${format(
+            sum([net, social]) - sum([prev.net, prev.social]),
+            {
+              addSign: true,
+            }
+          )}"></td>
         </tr>
       </tbody>
     </table>
