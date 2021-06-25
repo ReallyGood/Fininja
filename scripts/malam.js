@@ -82,12 +82,19 @@ function inject(results) {
   const newMarkup = `
   <style>
     #fininja .dim { opacity: 0.6; }
-    #fininja table { width: 609px; margin-bottom: 15px; font-weight: normal; }
-    #fininja table th:nth-child(n+2) { width: 120px; }
-    #fininja table.noPrev { width: 34%; }
-    #fininja table.noPrev thead { display: none; }
-    #fininja table.noPrev td:nth-child(n+3) { display: none; }
+    #fininja table { width: auto; margin-bottom: 15px; font-weight: normal; }
+    #fininja tr.ninja-title { background-color: #496664; color: #fff; }
+    #fininja table:not(.noPrev) td.compare-ad { display: none; }
+
+    #fininja table.noPrev th.diff,
+    #fininja table.noPrev td.b,
+    #fininja table.noPrev td[data-diff] { display: none; }
     #fininja table td:first-child { font-weight: normal; }
+
+    #fininja table th:first-child { width: 213px; }
+    #fininja table th:nth-child(n+2) { width: 120px; }
+
+    #fininja .compare-ad { text-align: center; padding-top: 66px; }
 
     #fininja [data-diff] { direction: ltr; }
     #fininja [data-diff]::after { content: attr(data-diff); }
@@ -97,6 +104,8 @@ function inject(results) {
     #fininja .more-is-better [data-diff^="‎-"],
     #fininja .less-is-better [data-diff^="+"] { color: hsl(16deg 68% 50%); }
 
+    #fininja tfoot input[type="button"] {margin: 0;}
+
     #fininja footer { padding-right: 7px; }
     #fininja footer img { display: inline; height: 16px; vertical-align: -3px; margin-left: 3px; }
   </style>
@@ -104,28 +113,29 @@ function inject(results) {
     <h1 class="brcolor5" id="fininja-results"><span>כמה עשית החודש?</span></h1>
     <table class="tablestylelines ${!prevJSON && "noPrev"}">
       <thead>
-        <tr>
+        <tr class="ninja-title">
           <th></th>
-          <th>בחישוב הזה</th>
-          <th>בחישוב הקודם</th>
-          <th>הפרש</th>
+          <th>תלוש א'</th>
+          <th class="comparison b">תלוש ב'</th>
+          <th class="comparison diff">הפרש</th>
         </tr>
       </thead>
       <tbody>
         <tr class="less-is-better">
           <td>עלות מעסיק</td>
           <td>${format(employerCost)}</td>
-          <td>${format(prev.employerCost)}</td>
+          <td class="b">${format(prev.employerCost)}</td>
           <td data-diff="${format(employerCost - prev.employerCost, {
             addSign: true,
           })}"></td>
+          <td class="compare-ad" rowspan="5">-</td>
         </tr>
         <tr class="less-is-better">
           <td>מיסים</td>
           <td>${format(
             taxRobbery
           )} <span class="dim">(%${taxPercentage})</span></td>
-          <td>${format(prev.taxRobbery)} <span class="dim">(%${
+          <td class="b">${format(prev.taxRobbery)} <span class="dim">(%${
     prev.taxPercentage
   })</span></td>
           <td data-diff="${format(taxRobbery - prev.taxRobbery, {
@@ -135,7 +145,7 @@ function inject(results) {
         <tr class="more-is-better">
           <td>סוציאליות</td>
           <td>${format(social)}</td>
-          <td>${format(prev.social)}</td>
+          <td class="b">${format(prev.social)}</td>
           <td data-diff="${format(social - prev.social, {
             addSign: true,
           })}"></td>
@@ -143,13 +153,13 @@ function inject(results) {
         <tr class="more-is-better">
           <td>נטו בבנק</td>
           <td>${format(net)}</td>
-          <td>${format(prev.net)}</td>
+          <td class="b">${format(prev.net)}</td>
           <td data-diff="${format(net - prev.net, { addSign: true })}"></td>
         </tr>
         <tr class="more-is-better">
           <td>אצלך בכיס (נטו + סוציאליות)</td>
           <td>${format(sum([net, social]))}</td>
-          <td>${format(sum([prev.net, prev.social]))}</td>
+          <td class="b">${format(sum([prev.net, prev.social]))}</td>
           <td data-diff="${format(
             sum([net, social]) - sum([prev.net, prev.social]),
             {
@@ -158,6 +168,12 @@ function inject(results) {
           )}"></td>
         </tr>
       </tbody>
+      <tfoot>
+        <td>&nbsp;</td>
+        <td><input id="ninja-0" class="ninja-new-calc" type="button" value="חישוב חדש"></td>
+        <td><input id="ninja-1" class="ninja-new-calc" type="button" value="חישוב חדש"></td>
+        <td data-diff>&nbsp;</td>
+      </tfoot>
     </table>
     <footer>
       <a href="https://www.facebook.com/groups/Fininja" target="_blank" title="ללמוד איך כסף עובד">
@@ -178,7 +194,20 @@ function inject(results) {
   const newContainer = document.createElement("div");
   newContainer.setAttribute("style", "margin-bottom: 30px;");
   newContainer.innerHTML = newMarkup;
+
   slip.prepend(newContainer);
+
+  // attach handlers to buttons
+  console.log("f", document.querySelectorAll(".ninja-new-calc"));
+
+  Array.from(document.querySelectorAll(".ninja-new-calc")).forEach((button) => {
+    button.addEventListener("click", function () {
+      const [, index] = this.getAttribute("id").split("ninja-");
+      console.log("clicked new calc ninja", index);
+      document.querySelector("#pyCalculator").style.display = "block";
+      document.querySelector("#paySlip").style.display = "none";
+    });
+  });
 }
 
 init();
