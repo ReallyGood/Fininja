@@ -32,6 +32,8 @@ function init() {
 
 function processAndInject() {
   // grab everything
+  const base = grab("PSSal");
+
   const taxRobbery = sum([
     grab("PS_EX_ER_CONT_NI"), // ביטוח לאומי מעסיק
     grab("EX_TAX_DED"), // מס הכנסה
@@ -53,7 +55,14 @@ function processAndInject() {
   // sanity. Allow for a tiny difference due to js infamous handling of floating point numbers
   if (Math.abs(employerCost - sum([net, social, taxRobbery]) < 2)) {
     const taxPercentage = ((taxRobbery / employerCost) * 100).toFixed(1);
-    const results = { taxRobbery, social, employerCost, net, taxPercentage };
+    const results = {
+      base,
+      taxRobbery,
+      social,
+      employerCost,
+      net,
+      taxPercentage,
+    };
     inject(results);
     localStorage.setItem("prevFininjaResults", JSON.stringify(results));
   } else {
@@ -67,12 +76,20 @@ function inject(results) {
     return;
   }
 
-  const { taxRobbery, social, employerCost, net, taxPercentage } = results;
+  const { base, taxRobbery, social, employerCost, net, taxPercentage } =
+    results;
 
   const prevJSON = localStorage.getItem("prevFininjaResults");
   const prev = prevJSON
     ? JSON.parse(prevJSON)
-    : { taxRobbery: 0, social: 0, employerCost: 0, net: 0, taxPercentage: 0 };
+    : {
+        base: 0,
+        taxRobbery: 0,
+        social: 0,
+        employerCost: 0,
+        net: 0,
+        taxPercentage: 0,
+      };
 
   const format = (number, { addSign = false } = {}) => {
     const sign = addSign && number > 0 ? "+" : "";
@@ -121,6 +138,15 @@ function inject(results) {
         </tr>
       </thead>
       <tbody>
+        <tr class="more-is-better">
+          <td>שכר בסיס</td>
+          <td>${format(base)}</td>
+          <td class="b">${format(prev.base)}</td>
+          <td data-diff="${format(base - prev.base, {
+            addSign: true,
+          })}"></td>
+          <td class="compare-ad" rowspan="5">-</td>
+        </tr>
         <tr class="less-is-better">
           <td>עלות מעסיק</td>
           <td>${format(employerCost)}</td>
@@ -198,8 +224,6 @@ function inject(results) {
   slip.prepend(newContainer);
 
   // attach handlers to buttons
-  console.log("f", document.querySelectorAll(".ninja-new-calc"));
-
   Array.from(document.querySelectorAll(".ninja-new-calc")).forEach((button) => {
     button.addEventListener("click", function () {
       const [, index] = this.getAttribute("id").split("ninja-");
